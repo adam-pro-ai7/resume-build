@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adam Muhammad - Software Engineer</title>
+<style>
+  @page { size: A4; margin: 11mm 13mm 11mm 13mm; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: "Segoe UI", Calibri, Carlito, Arial, sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.35;
+    color: #2e2e2e;
+  }
+
+  /* ---------- header ---------- */
+  header { text-align: center; padding-bottom: 6px; }
+
+  h1 {
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-size: 25pt;
+    font-weight: 700;
+    letter-spacing: 4.5px;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .role {
+    margin-top: 5px;
+    font-size: 9.3pt;
+    font-weight: 600;
+    letter-spacing: 1.9px;
+    text-transform: uppercase;
+    color: #444;
+  }
+
+  .contact {
+    margin-top: 7px;
+    font-size: 8.7pt;
+    color: #333;
+    line-height: 1.55;
+  }
+  .contact .sep { color: #999; padding: 0 5px; }
+  /* Clickable in the PDF, but styled as plain text so the document stays
+     classical and prints cleanly in black and white. */
+  .contact a { color: #333; text-decoration: none; }
+  /* Keep each "Label: URL" pair intact so a wrap never lands mid-address. */
+  .contact .link { white-space: nowrap; }
+
+  /* classic double rule — content-box so the 2px height is the GAP between
+     the two borders; with border-box the borders overlap into one thick bar. */
+  .rule {
+    box-sizing: content-box;
+    margin-top: 8px;
+    height: 2px;
+    border-top: 2.2pt solid #000;
+    border-bottom: 0.6pt solid #000;
+  }
+
+  /* ---------- sections ---------- */
+  h2 {
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: 0.8pt solid #000;
+    padding-bottom: 2px;
+    margin: 11px 0 6px;
+  }
+
+  p.summary { text-align: justify; }
+  p.summary strong { color: #000; font-weight: 600; }
+
+  /* ---------- skills ---------- */
+  .skill { margin-bottom: 3.4px; padding-left: 0; }
+  .skill b { color: #000; font-weight: 700; }
+
+  /* ---------- experience ---------- */
+  .job { margin-bottom: 9px; }
+
+  .jobhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .company {
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-size: 11.6pt;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: .2px;
+  }
+  .meta { font-size: 8.9pt; color: #333; white-space: nowrap; font-weight: 600; }
+
+  .title {
+    font-size: 9.9pt;
+    font-weight: 600;
+    font-style: italic;
+    color: #333;
+    margin-top: 1px;
+    letter-spacing: .2px;
+  }
+
+  .project {
+    margin-top: 6.5px;
+    font-size: 9.7pt;
+    font-weight: 700;
+    color: #000;
+    break-inside: avoid;
+  }
+  .project span { font-weight: 400; font-style: italic; color: #555; }
+
+  ul { margin: 2.5px 0 0 0; padding-left: 14px; }
+  li { margin-bottom: 1.8px; }
+  li::marker { color: #666; }
+  li strong { font-weight: 600; color: #000; }
+
+  /* ---------- education ---------- */
+  .edu { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 4.5px; }
+  .edu .deg { font-weight: 700; color: #000; }
+  .edu .inst { font-weight: 400; font-style: italic; color: #444; }
+  .edu .yr { font-size: 8.9pt; color: #333; white-space: nowrap; font-weight: 600; }
+
+  /* ---------- placeholders to fill before sending ---------- */
+  /* Neutral grey so the document stays classical in colour and in B/W print.
+     Fill them from the Placeholders panel, or edit them inline. */
+  .ph {
+    background: #e8e8e8;
+    padding: 0 2px;
+    color: #000;
+    font-weight: 700;
+  }
+  .ph.filled { background: none; padding: 0; font-weight: inherit; }
+
+  .keep { break-inside: avoid; }
+
+  /* =========================================================================
+     SCREEN CHROME — toolbar, A4 paper preview, editor panel.
+     All of this is print-suppressed further down, so the PDF that build.ps1
+     generates is unaffected by everything in this block.
+     ========================================================================= */
+  @media screen {
+    body {
+      background: #545a63;
+      padding: 62px 0 60px;
+    }
+
+    /* the sheet of A4 paper */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 11mm 13mm;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.32), 0 14px 40px rgba(0,0,0,.34);
+      position: relative;
+      transform-origin: top center;
+    }
+
+    .page[contenteditable="true"] { outline: 2px solid #4c8dff; outline-offset: 4px; }
+
+    /* dashed guides showing where the printer will break pages */
+    .brk {
+      position: absolute;
+      left: 0; right: 0;
+      border-top: 1px dashed #c02b2b;
+      pointer-events: none;
+      user-select: none;
+    }
+    .brk::after {
+      content: attr(data-label);
+      position: absolute;
+      right: 4px; top: 3px;
+      font: 600 7pt "Segoe UI", Arial, sans-serif;
+      color: #c02b2b;
+      letter-spacing: .5px;
+    }
+
+    /* ---------- toolbar ---------- */
+    .bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 8px 14px;
+      background: #24282e;
+      border-bottom: 1px solid #000;
+      font: 500 12px "Segoe UI", Arial, sans-serif;
+      color: #e7e9ec;
+    }
+    .bar .brand { font-weight: 700; letter-spacing: .4px; margin-right: 4px; }
+    .bar .spacer { flex: 1 1 auto; }
+
+    .bar button, .bar select {
+      font: 500 12px "Segoe UI", Arial, sans-serif;
+      color: #e7e9ec;
+      background: #343a42;
+      border: 1px solid #4a525c;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .bar button:hover, .bar select:hover { background: #3f4650; }
+    .bar button.on { background: #2f6bd8; border-color: #2f6bd8; color: #fff; }
+    .bar button.primary { background: #1f7a44; border-color: #1f7a44; color: #fff; }
+    .bar button.primary:hover { background: #238b4e; }
+    .bar .status { font-size: 11px; color: #9aa3ae; min-width: 110px; }
+
+    /* ---------- placeholder panel ---------- */
+    .panel {
+      position: fixed;
+      top: 46px; right: 0; bottom: 0;
+      z-index: 40;
+      width: 330px;
+      overflow-y: auto;
+      padding: 14px 16px 24px;
+      background: #2b3038;
+      border-left: 1px solid #000;
+      font: 400 12px "Segoe UI", Arial, sans-serif;
+      color: #dfe3e8;
+      display: none;
+    }
+    .panel.open { display: block; }
+    .panel h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9aa3ae;
+      margin-bottom: 4px;
+    }
+    .panel .hint { font-size: 11px; color: #8d97a3; line-height: 1.5; margin-bottom: 12px; }
+    .panel .row { margin-bottom: 10px; }
+    .panel .row label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: #98a2ae;
+      margin-bottom: 3px;
+    }
+    .panel .row input {
+      width: 100%;
+      font: 400 12px "Segoe UI", Arial, sans-serif;
+      color: #fff;
+      background: #1f242b;
+      border: 1px solid #454d57;
+      border-radius: 3px;
+      padding: 6px 8px;
+    }
+    .panel .row input:focus { outline: none; border-color: #2f6bd8; }
+    .panel .row.done input { border-color: #2f7a4c; }
+    .panel .ctx { font-size: 10px; color: #79838f; margin-top: 3px; font-style: italic; }
+  }
+
+  /* =========================================================================
+     PRINT / PDF — strip every bit of screen chrome so output is identical to
+     the original print-only stylesheet.
+     ========================================================================= */
+  @media print {
+    .bar, .panel, .brk { display: none !important; }
+    body { background: none; padding: 0; }
+    .page {
+      width: auto;
+      min-height: 0;
+      padding: 0;
+      margin: 0;
+      background: none;
+      box-shadow: none;
+      transform: none;
+      outline: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar" role="toolbar" aria-label="Resume editor toolbar">
+  <span class="brand">Resume Builder</span>
+  <button id="btnEdit" type="button" title="Toggle inline editing of the document">Edit</button>
+  <button id="btnPanel" type="button" title="Show the fill-in-the-blanks panel">Placeholders</button>
+  <button id="btnGuides" type="button" class="on" title="Show where the printer breaks pages">Page guides</button>
+  <select id="zoom" title="Preview zoom">
+    <option value="0.6">60%</option>
+    <option value="0.75">75%</option>
+    <option value="0.9">90%</option>
+    <option value="1" selected>100%</option>
+    <option value="1.25">125%</option>
+    <option value="1.5">150%</option>
+  </select>
+  <span class="spacer"></span>
+  <span class="status" id="status"></span>
+  <button id="btnReset" type="button" title="Discard all local edits and restore the original">Reset</button>
+  <button id="btnPrint" type="button" class="primary" title="Print / Save as PDF">Save as PDF</button>
+</div>
+
+<aside class="panel" id="panel" aria-label="Placeholder values">
+  <h3>Fill the blanks</h3>
+  <p class="hint">Every grey highlight in the document is listed here. Type a value and it drops straight into the resume &mdash; the grey highlight disappears once filled.</p>
+  <div id="phList"></div>
+</aside>
+
+<div class="page" id="page">
+
+<header>
+  <h1>Adam Muhammad</h1>
+  <div class="role">Software Engineer &nbsp;|&nbsp; Full Stack Developer (Angular + .NET Core) &nbsp;|&nbsp; Frontend Engineer</div>
+  <div class="contact">
+    Chennai (East Tambaram), Tamil Nadu, India
+    <span class="sep">|</span> adam.dev.ai7@gmail.com
+    <span class="sep">|</span> +91-883-893-6104
+    <br>
+    <span class="link">LinkedIn: <a href="http://www.linkedin.com/in/adam-muhammad-6187602a0">http://www.linkedin.com/in/adam-muhammad-6187602a0</a></span>
+    <span class="sep">|</span> <span class="link">GitHub: <a href="https://github.com/Adam-AI7">https://github.com/Adam-AI7</a></span>
+    <br>
+    <span class="link">Portfolio: <a href="https://adam-pro-ai7.github.io/adam-portfolio/">https://adam-pro-ai7.github.io/adam-portfolio/</a></span>
+  </div>
+  <div class="rule"></div>
+</header>
+
+<h2>Professional Summary</h2>
+<p class="summary">
+  Software Engineer with <strong>5 years of experience</strong> designing and delivering scalable, real-time
+  enterprise web applications across procurement and IoT domains. Specialized in <strong>Angular (versions 8
+  through 20)</strong>, <strong>TypeScript</strong>, <strong>RxJS</strong> and standalone component architecture,
+  with hands-on full stack delivery using <strong>.NET Core</strong> and <strong>C#</strong> REST APIs.
+  Experienced in state management (<strong>NGXS, NgRx</strong>), real-time data streaming over
+  <strong>WebSocket</strong> and <strong>MQTT</strong>, single page application (SPA) performance optimization,
+  <strong>JWT authentication</strong>, and <strong>CI/CD</strong> (continuous integration and continuous delivery)
+  automation with <strong>Jenkins</strong>. Applies <strong>AI-assisted development</strong> workflows &mdash;
+  <strong>Claude Code</strong>, <strong>Model Context Protocol (MCP)</strong> servers, custom agent skills and
+  <strong>prompt engineering</strong> &mdash; to accelerate delivery and standardize code quality. Delivers
+  production software in <strong>Agile/Scrum</strong> teams across the full software development life cycle (SDLC).
+</p>
+
+<h2>Technical Skills</h2>
+<div class="skill"><b>Frontend Development:</b> Angular 8 to Angular 20, TypeScript, JavaScript (ES6+), RxJS, HTML5, CSS3, Angular Material, Bootstrap, Responsive Web Design, Standalone Components, Micro Frontend Architecture, Single Page Applications (SPA), Component-Based Architecture, Reactive Forms, Angular Router</div>
+<div class="skill"><b>State Management:</b> NGXS, NgRx, Redux Pattern, Observables, Selectors, Effects</div>
+<div class="skill"><b>Backend &amp; APIs:</b> .NET Core, C#, RESTful Web API Development, REST APIs, Angular HttpClient, AJAX, WebSocket, MQTT, JSON, HTTP Interceptors, Centralized Error Handling, Retry Logic</div>
+<div class="skill"><b>Security &amp; Authentication:</b> JWT (JSON Web Token) Authentication, OAuth 2.0, SAML 2.0, Single Sign-On (SSO), Role-Based Access Control</div>
+<div class="skill"><b>Testing &amp; Quality:</b> Unit Testing, Jasmine, Karma, Code Coverage, Debugging</div>
+<div class="skill"><b>AI-Assisted Development:</b> Claude Code, Model Context Protocol (MCP), Custom Agent Skills, Prompt Engineering, AI-Assisted Code Generation and Refactoring, AI-Generated Unit Tests, Agentic Workflow Automation, LLM-Based Developer Tooling</div>
+<div class="skill"><b>Build, DevOps &amp; Version Control:</b> Angular CLI, Webpack, npm, Code Splitting, Bundle Optimization, Jenkins, CI/CD Pipelines, Automated Build and Deployment, Git, GitHub, Feature Branching, Pull Requests, Code Reviews</div>
+<div class="skill"><b>Performance Engineering:</b> Lazy Loading, Route-Based Code Splitting, Change Detection Optimization, Memory Optimization, Load Time Reduction</div>
+<div class="skill"><b>Methodologies:</b> Agile, Scrum, Sprint Planning, Daily Stand-ups, Sprint Retrospectives, SDLC, Requirement Analysis, Cross-Functional Collaboration</div>
+<div class="skill"><b>Domain Experience:</b> Procurement Automation (RFQ, RFT, Purchase Orders, Online Bidding, Supplier Management), IoT Telemetry, Fleet Management, Real-Time Monitoring Dashboards, Threshold-Based Alerting</div>
+
+<h2>Professional Experience</h2>
+
+<div class="job">
+  <div class="jobhead">
+    <div class="company">Krya Solutions Pvt Ltd</div>
+    <div class="meta">Chennai, India &nbsp;|&nbsp; 02/2025 &ndash; Present</div>
+  </div>
+  <div class="title">Software Engineer</div>
+
+  <div class="project">Procurement Management Platform <span>&mdash; Angular 17+, .NET Core, NGXS, RxJS</span></div>
+  <ul>
+    <li><strong>Architected</strong> a standalone, feature-based Angular 17+ procurement application covering Supplier Management, RFQ, RFT, Purchase Order and Online Bidding workflows for enterprise users.</li>
+    <li><strong>Integrated</strong> .NET Core REST APIs through Angular HttpClient with HTTP interceptors, centralized error handling and retry logic, improving data reliability and request resilience.</li>
+    <li><strong>Engineered</strong> data-driven dashboards and multi-step approval workflows using RxJS observable streams and asynchronous data handling, delivering real-time business insights to procurement teams.</li>
+    <li><strong>Implemented</strong> lazy loading and route-based code splitting, reducing initial bundle size and improving application load time by <span class="ph" data-label="Procurement app: load-time improvement %">X%</span>.</li>
+    <li><strong>Adopted</strong> NGXS state management to model complex procurement workflows, reducing cross-module coupling and cutting feature delivery time for new modules.</li>
+    <li><strong>Delivered</strong> working increments each sprint in an Agile/Scrum team using Git feature branching, pull requests and peer code reviews.</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="jobhead">
+    <div class="company">Ethical Intelligent Technologies</div>
+    <div class="meta">Chennai, India &nbsp;|&nbsp; 02/2022 &ndash; 02/2025</div>
+  </div>
+  <div class="title">Software Engineer</div>
+
+  <div class="project">Onboard System &mdash; Fleet Management Platform <span>&mdash; Angular, RxJS, WebSocket, MQTT</span></div>
+  <ul>
+    <li><strong>Built</strong> a centralized Angular web platform for fleet and asset management supporting <span class="ph" data-label="Fleet: number of organizations">X</span> organizations and <span class="ph" data-label="Fleet: number of connected vehicles">X</span> connected vehicles across distributed networks.</li>
+    <li><strong>Implemented</strong> real-time telemetry pipelines over WebSocket and MQTT APIs, maintaining data consistency across large-scale live fleets under continuous load.</li>
+    <li><strong>Developed</strong> reusable RxJS-driven UI components that stream live vehicle and asset updates into operational dashboards, reducing duplicate component code across modules.</li>
+    <li><strong>Improved</strong> dashboard responsiveness and data accuracy for high-volume distributed fleet operations.</li>
+  </ul>
+
+  <div class="project">Environment Monitoring Platform <span>&mdash; Angular, RxJS, WebSocket, MQTT</span></div>
+  <ul>
+    <li><strong>Designed</strong> a real-time Angular monitoring interface for server rooms, laboratories and medical facilities, visualizing live environmental sensor telemetry.</li>
+    <li><strong>Implemented</strong> threshold-based alerting and live data visualization, reducing time-to-detection of environmental anomalies by <span class="ph" data-label="Monitoring: anomaly detection-time reduction %">X%</span>.</li>
+    <li><strong>Optimized</strong> Angular change detection and memory usage to sustain continuous 24x7 monitoring on mission-critical systems without performance degradation.</li>
+    <li><strong>Supported</strong> environmental compliance reporting requirements for regulated facilities through reliable, scalable data views.</li>
+  </ul>
+
+  <div class="project">Refa Rental Platform <span>&mdash; Angular 17, Standalone Components</span></div>
+  <ul>
+    <li><strong>Developed</strong> a modern Angular 17 application for residential and commercial rental management using standalone components and reusable shared modules.</li>
+    <li><strong>Implemented</strong> clean, modular routing strategies to support maintainable feature growth and scalable navigation.</li>
+    <li><strong>Designed</strong> the frontend architecture for future extensibility, including multi-language support and embedded analytics.</li>
+  </ul>
+</div>
+
+<h2>Key Responsibilities &amp; Achievements</h2>
+<ul>
+  <li><strong>Owned</strong> end-to-end SDLC delivery: requirement analysis, technical design, development, testing support, deployment and production issue resolution.</li>
+  <li><strong>Introduced</strong> AI-assisted development workflows using <strong>Claude Code</strong>, <strong>Model Context Protocol (MCP)</strong> servers and custom agent skills to automate repetitive delivery work &mdash; component internationalization, email-template code generation and unit-test scaffolding &mdash; reducing manual effort and standardizing output across the team.</li>
+  <li><strong>Standardized</strong> peer code review and Angular best-practice guidelines adopted across project teams, improving code quality and reducing review rework.</li>
+  <li><strong>Integrated</strong> Jenkins CI/CD pipelines for automated builds, tests and deployments, reducing manual release effort by <span class="ph" data-label="Jenkins CI/CD: manual release effort reduction %">X%</span>.</li>
+  <li><strong>Reduced</strong> enterprise dashboard initial load time by <span class="ph" data-label="Dashboard: initial load-time reduction %">X%</span> through lazy loading, code splitting and change detection optimization.</li>
+  <li><strong>Designed</strong> scalable modular architectures aligned with Micro Frontend principles.</li>
+  <li><strong>Delivered</strong> responsive, mobile-optimized user interfaces, extending platform accessibility across desktop and mobile devices.</li>
+  <li><strong>Championed</strong> Agile/Scrum ceremonies, improving sprint predictability and team throughput.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="keep">
+  <div class="edu">
+    <div><span class="deg"><span class="ph" data-label="Degree (e.g. B.E. Computer Science Engineering)">Degree &mdash; e.g. B.E. Computer Science Engineering</span></span>
+      <span class="inst">&mdash; <span class="ph" data-label="College / university name">Institution Name</span>, Tamil Nadu</span></div>
+    <div class="yr">2014 &ndash; 2017 &nbsp;|&nbsp; 68%</div>
+  </div>
+  <div class="edu">
+    <div><span class="deg">Higher Secondary Certificate (HSC)</span>
+      <span class="inst">&mdash; <span class="ph" data-label="HSC school name">School Name</span>, Tamil Nadu</span></div>
+    <div class="yr">2014 &nbsp;|&nbsp; 68.3%</div>
+  </div>
+  <div class="edu">
+    <div><span class="deg">Secondary School Leaving Certificate (SSLC)</span>
+      <span class="inst">&mdash; <span class="ph" data-label="SSLC school name">School Name</span>, Tamil Nadu</span></div>
+    <div class="yr">2011 &nbsp;|&nbsp; 91%</div>
+  </div>
+</div>
+
+</div><!-- /.page -->
+
+<script>
+(function () {
+  'use strict';
+
+  // Bumped when the baseline document changes, so an older saved draft can
+  // never resurrect stale content over the new baseline.
+  var STORE = 'adam-resume-html-v2';
+  var page    = document.getElementById('page');
+  var panel   = document.getElementById('panel');
+  var phList  = document.getElementById('phList');
+  var statusEl= document.getElementById('status');
+
+  // Pristine markup, captured before any saved draft is applied, so Reset
+  // always has somewhere to go back to.
+  var PRISTINE = page.innerHTML;
+
+  /* ---------------- status line ---------------- */
+  var statusTimer = null;
+  function say(msg, sticky) {
+    statusEl.textContent = msg;
+    if (statusTimer) { clearTimeout(statusTimer); statusTimer = null; }
+    if (!sticky) statusTimer = setTimeout(function () { statusEl.textContent = ''; }, 2200);
+  }
+
+  /* ---------------- persistence ---------------- */
+  function save() {
+    try {
+      localStorage.setItem(STORE, page.innerHTML);
+      say('Saved locally');
+    } catch (e) {
+      say('Could not save (storage blocked)');
+    }
+  }
+
+  function restore() {
+    var saved = null;
+    try { saved = localStorage.getItem(STORE); } catch (e) { /* file:// with storage off */ }
+    if (saved) {
+      page.innerHTML = saved;
+      say('Restored your saved draft', true);
+      setTimeout(function () { statusEl.textContent = ''; }, 3000);
+    }
+  }
+
+  /* ---------------- placeholder panel ---------------- */
+  // Each .ph carries an explicit data-label; fall back to trailing words of the
+  // preceding text for any blank added later without one.
+  function labelFor(span, original) {
+    if (span.dataset.label) return span.dataset.label;
+
+    var prev = span.previousSibling, lead = '';
+    while (prev && lead.length < 40) {
+      lead = (prev.textContent || '') + lead;
+      prev = prev.previousSibling;
+    }
+    lead = lead.replace(/\s+/g, ' ').trim();
+    var m = lead.match(/([A-Za-z()%.#+/&'-]+(?:\s+[A-Za-z()%.#+/&'-]+){0,5})$/);
+    var label = m ? m[1] : '';
+    if (!label || label.length < 3) label = original;
+    return label.length > 46 ? '...' + label.slice(-43) : label;
+  }
+
+  function context(span) {
+    var block = span.closest('li, .edu, .contact, p, div');
+    var text = (block ? block.textContent : span.textContent).replace(/\s+/g, ' ').trim();
+    return text.length > 90 ? text.slice(0, 88) + '...' : text;
+  }
+
+  function buildPanel() {
+    phList.innerHTML = '';
+    var spans = page.querySelectorAll('.ph');
+
+    if (!spans.length) {
+      phList.innerHTML = '<p class="hint">No blanks left — the resume is fully filled in.</p>';
+      return;
+    }
+
+    Array.prototype.forEach.call(spans, function (span, i) {
+      // Remember the original text once, so clearing an input can restore it.
+      if (!span.dataset.original) span.dataset.original = span.textContent;
+      var original = span.dataset.original;
+
+      var row = document.createElement('div');
+      row.className = 'row' + (span.classList.contains('filled') ? ' done' : '');
+
+      var lab = document.createElement('label');
+      lab.textContent = (i + 1) + '. ' + labelFor(span, original);
+      lab.htmlFor = 'ph' + i;
+
+      var input = document.createElement('input');
+      input.id = 'ph' + i;
+      input.type = 'text';
+      input.placeholder = original;
+      input.value = span.classList.contains('filled') ? span.textContent : '';
+
+      var ctx = document.createElement('div');
+      ctx.className = 'ctx';
+      ctx.textContent = context(span);
+
+      input.addEventListener('input', function () {
+        var v = input.value.trim();
+        if (v) {
+          span.textContent = v;
+          span.classList.add('filled');
+          row.classList.add('done');
+        } else {
+          span.textContent = original;
+          span.classList.remove('filled');
+          row.classList.remove('done');
+        }
+        drawGuides();
+        save();
+      });
+
+      input.addEventListener('focus', function () {
+        span.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      });
+
+      row.appendChild(lab);
+      row.appendChild(input);
+      row.appendChild(ctx);
+      phList.appendChild(row);
+    });
+  }
+
+  /* ---------------- page-break guides ---------------- */
+  var guidesOn = true;
+
+  function drawGuides() {
+    Array.prototype.forEach.call(page.querySelectorAll('.brk'), function (b) { b.remove(); });
+    if (!guidesOn) return;
+
+    var mm = 96 / 25.4;
+    var margin = 11 * mm;            // @page top/bottom margin
+    var printable = (297 - 22) * mm;  // usable content height per sheet
+    var total = page.scrollHeight;
+
+    for (var n = 1; margin + n * printable < total; n++) {
+      var b = document.createElement('div');
+      b.className = 'brk';
+      b.style.top = (margin + n * printable) + 'px';
+      b.setAttribute('data-label', 'PAGE ' + (n + 1));
+      page.appendChild(b);
+    }
+  }
+
+  function pageCount() {
+    var mm = 96 / 25.4;
+    var printable = (297 - 22) * mm;
+    var content = page.scrollHeight - 22 * mm;
+    return Math.max(1, Math.ceil(content / printable));
+  }
+
+  /* ---------------- toolbar wiring ---------------- */
+  var btnEdit   = document.getElementById('btnEdit');
+  var btnPanel  = document.getElementById('btnPanel');
+  var btnGuides = document.getElementById('btnGuides');
+  var btnReset  = document.getElementById('btnReset');
+  var btnPrint  = document.getElementById('btnPrint');
+  var zoom      = document.getElementById('zoom');
+
+  btnEdit.addEventListener('click', function () {
+    var on = page.getAttribute('contenteditable') === 'true';
+    page.setAttribute('contenteditable', on ? 'false' : 'true');
+    btnEdit.classList.toggle('on', !on);
+    btnEdit.textContent = on ? 'Edit' : 'Done editing';
+    if (!on) { page.focus(); say('Editing on — click any text to change it', true); }
+    else { save(); buildPanel(); say('Editing off'); }
+  });
+
+  btnPanel.addEventListener('click', function () {
+    var open = panel.classList.toggle('open');
+    btnPanel.classList.toggle('on', open);
+  });
+
+  btnGuides.addEventListener('click', function () {
+    guidesOn = !guidesOn;
+    btnGuides.classList.toggle('on', guidesOn);
+    drawGuides();
+  });
+
+  btnReset.addEventListener('click', function () {
+    if (!confirm('Discard all local edits and restore the original resume?')) return;
+    page.innerHTML = PRISTINE;
+    try { localStorage.removeItem(STORE); } catch (e) {}
+    buildPanel();
+    drawGuides();
+    say('Reset to original');
+  });
+
+  btnPrint.addEventListener('click', function () {
+    // Leave edit mode first so the focus outline never lands in the PDF.
+    if (page.getAttribute('contenteditable') === 'true') btnEdit.click();
+    window.print();
+  });
+
+  zoom.addEventListener('change', function () {
+    var z = parseFloat(zoom.value);
+    page.style.transform = z === 1 ? 'none' : 'scale(' + z + ')';
+    // Collapse the gap a scaled sheet leaves behind.
+    page.style.marginBottom = z < 1 ? (page.offsetHeight * (z - 1)) + 'px' : '0';
+  });
+
+  // Autosave inline edits, debounced.
+  var saveTimer = null;
+  page.addEventListener('input', function () {
+    if (page.getAttribute('contenteditable') !== 'true') return;
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { save(); drawGuides(); }, 700);
+  });
+
+  window.addEventListener('resize', drawGuides);
+
+  /* ---------------- boot ---------------- */
+  restore();
+  buildPanel();
+  drawGuides();
+  if (!statusEl.textContent) say(pageCount() + ' page' + (pageCount() > 1 ? 's' : ''), true);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Scoped to resume-build/ — these rules apply to this folder and below.
+
+# build scratch
+*.log
+*.tmp
+
+# headless-Chrome throwaway profiles, if a run ever leaves one behind
+resume-build-*/
+
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+.vscode/
