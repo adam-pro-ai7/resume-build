@@ -1,10 +1,10 @@
-# Rebuilds Adam_Resume_AUG26.pdf from resume.html
+# Rebuilds Adam_Resume_AUG26.pdf from index.html
 # Usage:  powershell -ExecutionPolicy Bypass -File "d:\Adam Pro Works\resume-build\build.ps1"
 
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 if (-not (Test-Path $chrome)) { $chrome = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" }
 
-$src = "d:\Adam Pro Works\resume-build\resume.html"
+$src = "d:\Adam Pro Works\resume-build\index.html"
 $out = "d:\Adam Pro Works\resume-build\Adam_Resume_AUG26.pdf"
 
 # A stale/locked Chrome profile makes --print-to-pdf silently produce nothing,
